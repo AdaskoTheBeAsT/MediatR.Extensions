@@ -2,36 +2,51 @@
 
 namespace MediatR.Extensions.Autofac.Tests
 {
-    public class NoteHandler : INotificationHandler<Note>
+    using System.Threading;
+
+    public class NoteHandler
+        : INotificationHandler<Note>
     {
-        public void Handle(Note notification)
+        public Task Handle(Note notification, CancellationToken cancellationToken)
         {
             notification.Count++;
+
+#if NET452
+            return Task.Delay(0);
+#else   
+            return Task.CompletedTask;
+#endif
         }
     }
 
 
-    public class GenericNotificationHandler : INotificationHandler<INotificationWithCount>
+    public class GenericNotificationHandler
+        : INotificationHandler<INotificationWithCount>
     {
-        public void Handle(INotificationWithCount notification)
+        public Task Handle(INotificationWithCount notification, CancellationToken cancellationToken)
         {
             notification.Count++;
+            
+#if NET452
+            return Task.Delay(0);
+#else   
+            return Task.CompletedTask;
+#endif
         }
     }
 
-    public class AsyncNoteHandler : IAsyncNotificationHandler<Note>
+    public class AnotherNoteHandler
+        : INotificationHandler<Note>
     {
-        public async Task Handle(Note notification)
-        {
-            await Task.Run(() => notification.Count++);
-        }
-    }
-
-    public class AnotherNoteHandler : INotificationHandler<Note>
-    {
-        public void Handle(Note notification)
+        public Task Handle(Note notification, CancellationToken cancellationToken)
         {
             notification.Count++;
+            
+#if NET452
+            return Task.Delay(0);
+#else   
+            return Task.CompletedTask;
+#endif
         }
     }
     

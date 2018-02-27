@@ -2,7 +2,11 @@
 
 namespace MediatR.Extensions.Autofac.Tests
 {
-    public class DecoratorOne<TRequest, TResponse> : IRequestHandler<TRequest, TResponse> where TRequest : IRequestWithMessage<TResponse>
+    using System.Threading;
+
+    public class DecoratorOne<TRequest, TResponse>
+        : IRequestHandler<TRequest, TResponse>
+        where TRequest : IRequestWithMessage<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> _innerHander;
 
@@ -11,26 +15,10 @@ namespace MediatR.Extensions.Autofac.Tests
             _innerHander = innerHandler;
         }
 
-        public TResponse Handle(TRequest message)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
         {
-            message.Message += "DecoratorOne";
-            return _innerHander.Handle(message);
-        }
-    }
-
-    public class AsyncDecoratorOne<TRequest, TResponse> : IAsyncRequestHandler<TRequest, TResponse> where TRequest : IRequestWithMessage<TResponse>
-    {
-        private readonly IAsyncRequestHandler<TRequest, TResponse> _innerHander;
-
-        public AsyncDecoratorOne(IAsyncRequestHandler<TRequest, TResponse> innerHandler)
-        {
-            _innerHander = innerHandler;
-        }
-
-        public async Task<TResponse> Handle(TRequest message)
-        {
-            message.Message += "DecoratorOne";
-            return await _innerHander.Handle(message);
+            request.Message += "DecoratorOne";
+            return _innerHander.Handle(request, cancellationToken);
         }
     }
 }

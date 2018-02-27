@@ -5,8 +5,6 @@
         public static IMediatorBuilder UseFluentValidation(this IMediatorBuilder builder)
         {
             builder.WithRequestDecorator("FluentValidation", typeof (ValidationRequestHandler<,>));
-            builder.WithRequestDecorator("FluentValidationAsync", typeof (AsyncValidationRequestHandler<,>));
-
             return builder;
         }
     }

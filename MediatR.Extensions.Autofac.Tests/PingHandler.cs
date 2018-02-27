@@ -2,29 +2,23 @@ using System.Threading.Tasks;
 
 namespace MediatR.Extensions.Autofac.Tests
 {
-    public class PingHandler : IRequestHandler<Ping, Pong>
+    using System.Threading;
+
+    public class PingHandler
+        : IRequestHandler<Ping, Pong>
     {
-        public Pong Handle(Ping message)
+        public Task<Pong> Handle(Ping request, CancellationToken cancellationToken)
         {
-            return new Pong
-            {
-                Message = string.Format("{0}Handled", message.Message)
-            };
+            return Task.FromResult(
+                new Pong
+                {
+                    Message = string.Format("{0}Handled", request.Message)
+                });
         }
     }
 
-    public class AsyncPingHandler : IAsyncRequestHandler<Ping, Pong>
-    {
-        public async Task<Pong> Handle(Ping message)
-        {
-            return await Task.Run(() => new Pong
-            {
-                Message = string.Format("{0}HandledAsync", message.Message)
-            });
-        }
-    }
-
-    public class Ping : IRequestWithMessage<Pong>
+    public class Ping
+        : IRequestWithMessage<Pong>
     {
         public string Message { get; set; }
     }

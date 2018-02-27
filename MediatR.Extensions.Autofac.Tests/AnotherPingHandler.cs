@@ -2,25 +2,18 @@
 
 namespace MediatR.Extensions.Autofac.Tests
 {
-    public class AnotherPingHandler : IRequestHandler<AnotherPing, AnotherPong>
-    {
-        public AnotherPong Handle(AnotherPing message)
-        {
-            return new AnotherPong
-            {
-                Message = string.Format("{0}Handled", message.Message)
-            };
-        }
-    }
+    using System.Threading;
 
-    public class AsyncAnotherPingHandler : IAsyncRequestHandler<AnotherPing, AnotherPong>
+    public class AnotherPingHandler
+        : IRequestHandler<AnotherPing, AnotherPong>
     {
-        public async Task<AnotherPong> Handle(AnotherPing message)
+        public Task<AnotherPong> Handle(AnotherPing request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() => new AnotherPong
-            {
-                 Message = string.Format("{0}HandledAsync", message.Message)
-            });
+            return Task.FromResult(
+                new AnotherPong
+                {
+                    Message = string.Format("{0}Handled", request.Message)
+                });
         }
     }
 

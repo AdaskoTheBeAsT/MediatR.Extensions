@@ -2,7 +2,10 @@
 
 namespace MediatR.Extensions.Autofac
 {
-    internal class WrapperRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    using System.Threading;
+
+    internal class WrapperRequestHandler<TRequest, TResponse>
+        : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> _innerHandler;
@@ -12,25 +15,9 @@ namespace MediatR.Extensions.Autofac
             _innerHandler = innerHandler;
         }
 
-        public TResponse Handle(TRequest message)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
         {
-            return _innerHandler.Handle(message);
+            return _innerHandler.Handle(request, cancellationToken);
         }
     }
-
-    internal class AsyncWrapperRequestHandler<TRequest, TResponse> : IAsyncRequestHandler<TRequest, TResponse>
-        where TRequest : IAsyncRequest<TResponse>
-    {
-        private readonly IAsyncRequestHandler<TRequest, TResponse> _innerHandler;
-
-        public AsyncWrapperRequestHandler(IAsyncRequestHandler<TRequest, TResponse> innerHandler)
-        {
-            _innerHandler = innerHandler;
-        }
-
-        public async Task<TResponse> Handle(TRequest message)
-        {
-            return await _innerHandler.Handle(message);
-        }
-    } 
 }

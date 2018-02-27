@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions", "MediatR.Extensions\MediatR.Extensions.csproj", "{4EDAA61B-58B3-4187-A92C-1AEA8E520B47}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac", "MediatR.Extensions.Autofac\MediatR.Extensions.Autofac.csproj", "{2024E540-E9AD-450B-B1BF-0AE2D4A50F2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.FluentValidation", "MediatR.Extensions.FluentValidation\MediatR.Extensions.FluentValidation.csproj", "{E96912CC-BF9C-4754-B655-755516F9B53D}"
@@ -18,16 +16,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{67704C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Autofac.Tests", "MediatR.Extensions.Autofac.Tests\MediatR.Extensions.Autofac.Tests.csproj", "{ABE9681E-3770-46D1-8E6A-0145C5E20B8E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions", "MediatR.Extensions\MediatR.Extensions.csproj", "{A58207C4-6DA3-4823-97FF-B75EE99238A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4EDAA61B-58B3-4187-A92C-1AEA8E520B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EDAA61B-58B3-4187-A92C-1AEA8E520B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EDAA61B-58B3-4187-A92C-1AEA8E520B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EDAA61B-58B3-4187-A92C-1AEA8E520B47}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2024E540-E9AD-450B-B1BF-0AE2D4A50F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2024E540-E9AD-450B-B1BF-0AE2D4A50F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2024E540-E9AD-450B-B1BF-0AE2D4A50F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,8 +40,15 @@ Global
 		{ABE9681E-3770-46D1-8E6A-0145C5E20B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABE9681E-3770-46D1-8E6A-0145C5E20B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABE9681E-3770-46D1-8E6A-0145C5E20B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58207C4-6DA3-4823-97FF-B75EE99238A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58207C4-6DA3-4823-97FF-B75EE99238A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58207C4-6DA3-4823-97FF-B75EE99238A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58207C4-6DA3-4823-97FF-B75EE99238A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9683F2A1-D325-4BC3-81BA-E8780697321F}
 	EndGlobalSection
 EndGlobal

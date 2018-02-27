@@ -2,7 +2,12 @@
 
 namespace MediatR.Extensions.log4net
 {
-    public class LoggingRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    public class LoggingRequestHandler<TRequest, TResponse>
+        : IRequestHandler<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> _innerHander;
         private readonly ILog _log;
@@ -13,10 +18,10 @@ namespace MediatR.Extensions.log4net
             _log = LogManager.GetLogger(innerHandler.GetType());
         }
 
-        public TResponse Handle(TRequest message)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
         {
-            _log.Info(string.Format("Request: {0}", message));
-            var response = _innerHander.Handle(message);
+            _log.Info(string.Format("Request: {0}", request));
+            var response = await _innerHander.Handle(request, cancellationToken);
             _log.Info(string.Format("Response: {0}", response));
 
             return response;

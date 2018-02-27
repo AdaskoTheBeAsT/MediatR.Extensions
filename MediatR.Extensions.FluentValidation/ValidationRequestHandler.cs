@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FluentValidation;
 
 namespace MediatR.Extensions.FluentValidation
@@ -14,9 +16,9 @@ namespace MediatR.Extensions.FluentValidation
             _innerHander = innerHandler;
         }
 
-        public TResponse Handle(TRequest message)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
         {
-            var context = new ValidationContext(message);
+            var context = new ValidationContext(request);
 
             var failures =
                 _validators.Select(v => v.Validate(context)).SelectMany(r => r.Errors).Where(f => f != null).ToList();
@@ -26,7 +28,7 @@ namespace MediatR.Extensions.FluentValidation
                 throw new ValidationException(failures);
             }
 
-            return _innerHander.Handle(message);
+            return _innerHander.Handle(request, cancellationToken);
         }
     }
 }
